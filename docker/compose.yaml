@@ -1,0 +1,11 @@
+services:
+  server:
+    build:
+      context: ../mern-demo
+      dockerfile: server/Dockerfile
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../mern-demo/.env
+    restart: unless-stopped
+

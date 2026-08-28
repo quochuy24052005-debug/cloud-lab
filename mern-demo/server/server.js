@@ -1,21 +1,40 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
+const cors = require("cors");
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "../.env") });
 
 const Student = require("./models/student");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
+// Kiểm tra biến môi trường
+const MONGODB_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 5000;
+
+if (!MONGODB_URI) {
+  console.error("❌ Lỗi: Không tìm thấy MONGODB_URI trong file .env");
+  process.exit(1);
+}
 
 // Kết nối MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(MONGODB_URI)
   .then(() => {
-    console.log("MongoDB connected");
+    console.log("✅ MongoDB connected successfully");
+
+    // Chạy server sau khi kết nối DB thành công
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
   })
   .catch((error) => {
-    console.log("MongoDB connection error:", error);
+    console.error("❌ MongoDB connection error:", error.message || error);
+    console.error("👉 Vui lòng kiểm tra lại: Mật khẩu, IP Whitelist trên MongoDB Atlas (Network Access -> 0.0.0.0/0)");
+    process.exit(1);
   });
 
 // Câu 36: GET - Lấy danh sách sinh viên
@@ -78,9 +97,6 @@ app.delete("/api/students/:id", async (req, res) => {
   }
 });
 
-// Chạy server
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from Express!" });
 });

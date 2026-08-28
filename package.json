@@ -1,6 +1,12 @@
 {
-  "dependencies": {
-    "dotenv": "^17.4.2",
-    "mongoose": "^9.9.3"
+  "name": "cloud-lab",
+  "version": "1.0.0",
+  "description": "Cloud Computing Laboratory",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix mern-demo start",
+    "dev": "npm --prefix mern-demo run dev",
+    "server": "npm --prefix mern-demo start",
+    "client": "npm --prefix mern-demo/client run dev"
   }
 }

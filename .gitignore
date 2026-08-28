@@ -1,8 +1,12 @@
-*.log
-*.tmp
-bin/
+node_modules/
+dist/
 build/
+bin/
 *.log
 *.tmp
 __pycache__/
 .env
+.env*.local
+.DS_Store
+.vscode/
+.idea/
