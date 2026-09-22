@@ -156,7 +156,7 @@ function App() {
 
   return (
     <div style={{ maxWidth: "800px", margin: "20px auto", fontFamily: "sans-serif" }}>
-      <h1 style={{ textAlign: "center" }}>Quản lý sinh viên</h1>
+      <h1 style={{ textAlign: "center" }}>Quản lý sinh viên 2.0</h1>
 
       {/* FORM THÊM / CẬP NHẬT */}
       <div style={{ background: "#f8f9fa", padding: "20px", borderRadius: "8px", marginBottom: "20px", border: "1px solid #ddd" }}>
