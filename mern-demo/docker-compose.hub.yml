@@ -1,12 +1,14 @@
+
 services:
   backend:
-    image: qhuy24/mern-backend:1.0
+    image: qhuy24/mern-backend:1.1
     ports:
       - "5000:5000"
     environment:
-      - MONGODB_URI=mongodb+srv://quochuy24052005_db_user:quochuy2405@cluster0.zbkftsk.mongodb.net/?appName=Cluster0
+      - MONGODB_URI=${MONGODB_URI}
+      - CLIENT_URL=https://mern-frontend-238244.onrender.com
 
   frontend:
-    image: qhuy24/mern-frontend:1.0
+    image: qhuy24/mern-frontend:2.1
     ports:
       - "3000:3000"
