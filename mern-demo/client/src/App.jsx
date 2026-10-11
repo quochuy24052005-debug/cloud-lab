@@ -11,7 +11,7 @@ function App() {
 
   // Load danh sách sinh viên ban đầu
   const fetchStudents = () => {
-    fetch("http://localhost:5000/api/students")
+    fetch("https://mern-backend-238244.onrender.com/api/students")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Không thể tải danh sách sinh viên");
@@ -42,7 +42,7 @@ function App() {
     try {
       if (editingId) {
         // --- CHẾ ĐỘ CẬP NHẬT (PUT) ---
-        const response = await fetch(`http://localhost:5000/api/students/${editingId}`, {
+        const response = await fetch(`https://mern-backend-238244.onrender.com/api/students/${editingId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function App() {
         cancelEdit();
       } else {
         // --- CHẾ ĐỘ THÊM MỚI (POST) ---
-        const response = await fetch("http://localhost:5000/api/students", {
+        const response = await fetch("https://mern-backend-238244.onrender.com/api/students", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -129,7 +129,7 @@ function App() {
     if (!isConfirm) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const response = await fetch(`https://mern-backend-238244.onrender.com/api/students/${id}`, {
         method: "DELETE",
       });
 

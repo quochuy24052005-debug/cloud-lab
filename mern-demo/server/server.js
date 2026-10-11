@@ -8,7 +8,26 @@ const Student = require("./models/student");
 
 const app = express();
 
-app.use(cors());
+// ==============================
+// Cấu hình CORS
+// ==============================
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Kiểm tra biến môi trường
@@ -26,14 +45,15 @@ mongoose
   .then(() => {
     console.log("✅ MongoDB connected successfully");
 
-    // Chạy server sau khi kết nối DB thành công
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`🚀 Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
     console.error("❌ MongoDB connection error:", error.message || error);
-    console.error("👉 Vui lòng kiểm tra lại: Mật khẩu, IP Whitelist trên MongoDB Atlas (Network Access -> 0.0.0.0/0)");
+    console.error(
+      "👉 Vui lòng kiểm tra lại: Mật khẩu, IP Whitelist trên MongoDB Atlas (Network Access -> 0.0.0.0/0)"
+    );
     process.exit(1);
   });
 
